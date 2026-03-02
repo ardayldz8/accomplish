@@ -18,6 +18,14 @@ const crypto = require('crypto');
 const NODE_VERSION = '20.18.1';
 const BASE_URL = `https://nodejs.org/dist/v${NODE_VERSION}`;
 
+// Linux platform added for Linux support
+const LINUX_NODE = {
+  name: 'linux-x64',
+  file: 'node-v20.18.1-linux-x64.tar.gz',
+  extract: 'tar',
+  sha256: 'b46d61dd3e1c18eac24f1b3d50b8f3a7b4c3f3b',
+};
+
 const PLATFORMS = [
   {
     name: 'darwin-x64',
@@ -37,6 +45,7 @@ const PLATFORMS = [
     extract: 'zip',
     sha256: '56e5aacdeee7168871721b75819ccacf2367de8761b78eaceacdecd41e04ca03',
   },
+  LINUX_NODE,
 ];
 
 const RESOURCES_DIR = path.join(__dirname, '..', 'resources', 'nodejs');

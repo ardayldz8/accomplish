@@ -96,7 +96,7 @@ function createWindow() {
     ? path.join(process.resourcesPath, iconFile)
     : path.join(process.env.APP_ROOT!, 'resources', iconFile);
   const icon = nativeImage.createFromPath(iconPath);
-  if (process.platform === 'darwin' && app.dock && !icon.isEmpty()) {
+  if ((process.platform === 'darwin' || process.platform === 'linux') && app.dock && !icon.isEmpty()) {
     app.dock.setIcon(icon);
   }
 
@@ -111,7 +111,7 @@ function createWindow() {
     title: 'Accomplish',
     icon: icon.isEmpty() ? undefined : icon,
     backgroundColor: nativeTheme.shouldUseDarkColors ? '#171717' : '#f9f9f9',
-    titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : 'default',
+    titleBarStyle: (process.platform === 'darwin' || process.platform === 'linux') ? 'default' : 'default',
     trafficLightPosition: { x: 16, y: 16 },
     webPreferences: {
       preload: preloadPath,
@@ -291,7 +291,7 @@ if (!gotTheLock) {
 
     await skillsManager.initialize();
 
-    if (process.platform === 'darwin' && app.dock) {
+    if ((process.platform === 'darwin' || process.platform === 'linux') && app.dock) {
       const iconPath = app.isPackaged
         ? path.join(process.resourcesPath, 'icon.png')
         : path.join(process.env.APP_ROOT!, 'resources', 'icon.png');
@@ -329,7 +329,7 @@ if (!gotTheLock) {
 }
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
+  if (process.platform !== 'darwin' && process.platform !== 'linux') {
     app.quit();
   }
 });
