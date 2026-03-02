@@ -11,6 +11,7 @@ const fs = require('fs');
 const path = require('path');
 
 const isWindows = process.platform === 'win32';
+const isLinux = process.platform === 'linux';
 const nodeModulesPath = path.join(__dirname, '..', 'node_modules');
 const accomplishPath = path.join(nodeModulesPath, '@accomplish_ai');
 
@@ -28,6 +29,10 @@ const pnpmSymlinksToResolve = [
   'opencode-darwin-x64-baseline',
   'opencode-windows-x64',
   'opencode-windows-x64-baseline',
+
+  // Linux packages
+  'opencode-linux-x64',
+  'opencode-linux-x64-baseline',
 ];
 const resolvedSymlinks = {};
 
@@ -75,7 +80,11 @@ try {
 
   // On Windows, skip native module rebuild (use prebuilt binaries)
   // This avoids issues with node-pty's winpty.gyp batch file handling
-  const npmRebuildFlag = isWindows ? ' --config.npmRebuild=false' : '';
+  const isLinux = process.platform === 'linux';
+const npmRebuildFlag = isWindows ? ' --config.npmRebuild=false' : '';
+
+// Add Linux target if on Linux
+const targetArg = isLinux ? ' --linux' : ''
 
   // Use npx to run electron-builder to ensure it's found in node_modules
   const command = `npx electron-builder ${args}${npmRebuildFlag}`;

@@ -22,6 +22,7 @@
     "package": "pnpm download:nodejs && pnpm build:base && pnpm build:mcp-tools:package && node scripts/package.cjs --mac --publish never && npx electron-rebuild -f",
     "package:mac": "pnpm download:nodejs && pnpm build:base && pnpm build:mcp-tools:package && node scripts/package.cjs --mac --publish never && npx electron-rebuild -f",
     "package:win": "pnpm download:nodejs && pnpm build:base && pnpm build:mcp-tools:package && node scripts/package.cjs --win --x64 --publish never",
+    "package:linux": "pnpm download:nodejs && pnpm build:base && pnpm build:mcp-tools:package && node scripts/package.cjs --linux --x64 --publish never", "pnpm download:nodejs && pnpm build:base && pnpm build:mcp-tools:package && node scripts/package.cjs --win --x64 --publish never",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "lint": "tsc --noEmit",
@@ -97,6 +98,8 @@
       "node_modules/opencode-darwin-arm64/**",
       "node_modules/opencode-darwin-x64/**",
       "node_modules/opencode-darwin-x64-baseline/**",
+      "node_modules/opencode-linux-x64/**",
+      "node_modules/opencode-linux-x64-baseline/**",
       "node_modules/node-pty/**",
       "node_modules/electron-store/**",
       "node_modules/conf/**",
@@ -105,7 +108,7 @@
       "node_modules/atomically/**",
       "node_modules/debounce-fn/**",
       "!node_modules/@accomplish_ai/**",
-      "!node_modules/opencode-linux-*/**"
+
     ],
     "extraResources": [
       {
